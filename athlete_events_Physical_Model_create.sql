@@ -1,12 +1,12 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-03-26 23:43:22.667
+-- Last modification date: 2021-03-30 20:18:52.176
 
 -- tables
 -- Table: Athlete
 CREATE TABLE Athlete (
     Name text  NOT NULL,
     sex text  NULL,
-    Country_Name text  NOT NULL,
+    Country_NOC char(3)  NOT NULL,
     CONSTRAINT Athlete_pk PRIMARY KEY (Name)
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE Athlete (
 CREATE TABLE Country (
     Name text  NOT NULL,
     NOC char(3)  NOT NULL,
-    CONSTRAINT Country_pk PRIMARY KEY (Name)
+    CONSTRAINT Country_pk PRIMARY KEY (NOC)
 );
 
 -- Table: Games
@@ -23,7 +23,7 @@ CREATE TABLE Games (
     Year int  NOT NULL,
     Season text  NOT NULL,
     City int  NOT NULL,
-    Country_Name text  NOT NULL,
+    Country_NOC char(3)  NOT NULL,
     CONSTRAINT Games_pk PRIMARY KEY (YearSeason)
 );
 
@@ -56,16 +56,16 @@ CREATE TABLE Sport (
 -- foreign keys
 -- Reference: Athlete_Country (table: Athlete)
 ALTER TABLE Athlete ADD CONSTRAINT Athlete_Country
-    FOREIGN KEY (Country_Name)
-    REFERENCES Country (Name)  
+    FOREIGN KEY (Country_NOC)
+    REFERENCES Country (NOC)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: Games_Country (table: Games)
 ALTER TABLE Games ADD CONSTRAINT Games_Country
-    FOREIGN KEY (Country_Name)
-    REFERENCES Country (Name)  
+    FOREIGN KEY (Country_NOC)
+    REFERENCES Country (NOC)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
